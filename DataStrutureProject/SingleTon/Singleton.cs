@@ -1,8 +1,28 @@
 ﻿using System;
+using System.Threading.Tasks;
 
-namespace Practice
+namespace DataStructureProject.Singleton
 {
-    class Singleton
+    public class SingleTonPattern
+    {
+        public static async Task GetSingleTonPattern()
+        {
+            var outer = new Task(() =>
+            {
+                var singleTon = Singleton.GetInstance();
+                var singleTon2 = Singleton.GetInstance();
+
+                if (singleTon == singleTon2)
+                    Console.WriteLine("Same instance");
+            });
+
+            outer.Start();
+            await outer;
+        }
+
+    }
+
+    public class Singleton
     {
         private static Singleton _instance;
 

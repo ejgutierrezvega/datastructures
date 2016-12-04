@@ -7,7 +7,7 @@
     <ProjectGuid>{8CE3D3D1-716C-4AA2-9323-81B1F473F339}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Practice</RootNamespace>
+    <RootNamespace>DataStructureProject</RootNamespace>
     <AssemblyName>Practice</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -43,13 +43,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BinarySearchTree\BinarySearchAlgorithm.cs" />
+    <Compile Include="BubbleSort\BubbleSortAlgorithm.cs" />
+    <Compile Include="Exercises\BracketFormat.cs" />
+    <Compile Include="Fibonacci\Fibonacci.cs" />
+    <Compile Include="MergeSort\MergeSortAlgorithm.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Singleton.cs" />
+    <Compile Include="Shared\GeneralHelper.cs" />
+    <Compile Include="SingleTon\Singleton.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
