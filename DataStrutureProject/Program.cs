@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace DataStructureProject
 {
@@ -49,7 +50,8 @@ namespace DataStructureProject
             list.Add(3, "Bracket exercise");
             list.Add(4, "Binary search tree");
             list.Add(5, "Bubble sort");
-            list.Add(6, "Merge sort");
+            list.Add(6, "Merge sort recursive");
+            list.Add(7, "Merge sort iterative");
 
             return list;            
         }
@@ -62,6 +64,8 @@ namespace DataStructureProject
 
         private static bool RunSelected(int option)
         {
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
             bool result = true;
             switch(option)
             {
@@ -88,12 +92,24 @@ namespace DataStructureProject
                     BubbleSort.BubbleSortAlgorithm.InitializeBubleSort().GetAwaiter().GetResult();
                     break;
                 case 6:
-                    MergeSort.MergeSortAlgorithm.MergeSort().GetAwaiter().GetResult();
+                    MergeSort.MergeSortAlgorithm.MergeSortRecursive().GetAwaiter().GetResult();
+                    break;
+                case 7:
+                    MergeSort.MergeSortAlgorithm.MergeSortIterative().GetAwaiter().GetResult();
                     break;
                 default:
                     result = false;
                     break;
             }
+            stopWatch.Stop();
+
+            if (result)
+            {
+                TimeSpan ts = stopWatch.Elapsed;
+                string elapsedTime = String.Format("{0:00}:{1:00}:{2:00}.{3:00}", ts.Hours, ts.Minutes, ts.Seconds, ts.Milliseconds / 10);
+                Console.WriteLine($"Elapsed: {elapsedTime}");
+            }
+
             return result;
         }
     }
