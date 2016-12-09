@@ -1,10 +1,13 @@
-﻿using System;
+﻿using DataStructureProject;
+using DataStructureProject.LinkedListStructure;
+using DataStructureProject.Shared;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace DataStructureProject
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
@@ -52,6 +55,7 @@ namespace DataStructureProject
             list.Add(5, "Bubble sort");
             list.Add(6, "Merge sort recursive");
             list.Add(7, "Merge sort iterative");
+            list.Add(8, "Linked list");
 
             return list;            
         }
@@ -96,6 +100,11 @@ namespace DataStructureProject
                     break;
                 case 7:
                     MergeSort.MergeSortAlgorithm.MergeSortIterative().GetAwaiter().GetResult();
+                    break;
+                case 8:
+                    int[] data = GeneralHelper.GetListOfNumbersArray(20);
+                    var linkedList = new LinkedListStructure.LinkedList<int>();
+                    linkedList.Process(data);
                     break;
                 default:
                     result = false;

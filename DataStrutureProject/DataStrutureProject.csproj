@@ -45,8 +45,11 @@
   <ItemGroup>
     <Compile Include="BinarySearchTree\BinarySearchAlgorithm.cs" />
     <Compile Include="BubbleSort\BubbleSortAlgorithm.cs" />
+    <Compile Include="excerciseFactory.cs" />
     <Compile Include="Exercises\BracketFormat.cs" />
     <Compile Include="Fibonacci\Fibonacci.cs" />
+    <Compile Include="IExercise.cs" />
+    <Compile Include="LinkedListStructure\LinkedListExcercise.cs" />
     <Compile Include="MergeSort\MergeSortAlgorithm.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
