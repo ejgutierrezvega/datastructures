@@ -9,11 +9,18 @@ namespace DataStructureProject.Singleton
         {
             var outer = new Task(() =>
             {
-                var singleTon = Singleton.GetInstance();
-                var singleTon2 = Singleton.GetInstance();
+                var singleTon = Singleton.GetInstanceBasic();
+                var singleTon2 = Singleton.GetInstanceBasic();
 
-                if (singleTon == singleTon2)
-                    Console.WriteLine("Same instance");
+                Console.WriteLine($"Instance 1: {singleTon}");
+                Console.WriteLine($"Instance 2: {singleTon2}");
+
+                var singleTonThread = Singleton.GetInstanceThreadSafe();
+                var singleTonThread2 = Singleton.GetInstanceThreadSafe();
+
+                Console.WriteLine($"Instance (thread safe) 1: {singleTonThread}");
+                Console.WriteLine($"Instance (thread safe) 2: {singleTonThread2}");
+
             });
 
             outer.Start();
@@ -24,32 +31,46 @@ namespace DataStructureProject.Singleton
 
     public class Singleton
     {
-        private static Singleton _instance;
+        private static string _instance;
+        private static string _instanceThread;
 
         // Lock synchronization object
         private static object syncLock = new object();
 
         protected Singleton() { }
 
-        public static Singleton GetInstance()
+        public static string GetInstanceBasic()
+        {
+            if (_instance == null)
+            {
+                var random = new Random(DateTime.Now.Millisecond);
+                var number = random.Next(0, 100);
+                _instance = $"Creating random number: {number}";
+            }
+
+            return _instance;
+        }
+
+        public static string GetInstanceThreadSafe()
         {
             // Support multithreaded applications through
             // 'Double checked locking' pattern which (once
             // the instance exists) avoids locking each
             // time the method is invoked
-            if (_instance == null)
+            if (_instanceThread == null)
             {
                 lock (syncLock)
                 {
-                    if (_instance == null)
+                    if (_instanceThread == null)
                     {
-                        Console.WriteLine("Creating instance");
-                        _instance = new Singleton();
+                        var random = new Random(DateTime.Now.Millisecond);
+                        var number = random.Next(0, 100);
+                        _instanceThread = $"Creating random number: {number}";
                     }
                 }
             }
 
-            return _instance;
+            return _instanceThread;
         }
     }
 }
