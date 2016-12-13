@@ -1,10 +1,5 @@
-﻿using DataStructureProject;
-using DataStructureProject.Shared;
+﻿using DataStructureProject.Delegates;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DataStructureProject.LinkedListStructure
@@ -15,10 +10,35 @@ namespace DataStructureProject.LinkedListStructure
         public T data;
     }
 
-    public class LinkedList<T>
+    public class LinkedListStructure<T> : baseStructure<T>, IExercise<T>
     {
         private LinkedNode<T> head;
         private int Size = 0;
+
+        public LinkedListStructure()
+        {
+            base.Execute = LinkedListProcess;
+        }
+
+        public async Task<bool> ExecuteTask(T[] numbers)
+        {
+            var task = new Task(() =>
+            {
+                base.RunExercise(numbers);
+            });
+
+            task.Start();
+            await task;
+
+            return true;
+        }
+
+        public bool ExecuteExercise(T[] numbers)
+        {
+            base.RunExercise(numbers);
+
+            return true;
+        }
 
         public int Count
         {
@@ -82,7 +102,7 @@ namespace DataStructureProject.LinkedListStructure
             return default(T);
         }
 
-        public void Process(T[] data)
+        public void LinkedListProcess(T[] data)
         {
             AddList(data);
             PrintAll();

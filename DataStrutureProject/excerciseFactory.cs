@@ -1,4 +1,6 @@
-﻿using DataStructureProject.LinkedListStructure;
+﻿using DataStructureProject.BubbleSort;
+using DataStructureProject.LinkedListStructure;
+using DataStructureProject.MergeSort;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,14 +11,25 @@ namespace DataStructureProject
 {
     public class excerciseFactory
     {
-        public static IExercise<T, J>  GetExercise<T, J>(int option)
+        public static IExercise<T> GetExercise<T>(int option)
         {
-            IExercise<T, J> exercise = null;
+            IExercise<T> exercise = null;
 
             switch(option)
             {
+                case 5:
+                    exercise = new BubbleSortAlgorithm<T>();
+                    break;
+                case 6:
+                    exercise = new MergeSortRecursive<T>();
+                    break;
+                case 7:
+                    exercise = new MergeSortIterative<T>();
+                    break;
                 case 8:
-                    //exercise = new LinkedListExcercise<LinkedList<int>, int>() as IExercise<T, J>;
+                    exercise = new LinkedListStructure<T>();
+                    break;
+                default:
                     break;
             }
 

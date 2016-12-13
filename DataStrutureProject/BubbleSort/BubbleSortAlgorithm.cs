@@ -1,41 +1,53 @@
-﻿using DataStructureProject.Shared;
+﻿using DataStructureProject.Delegates;
+using DataStructureProject.Shared;
 using System;
-using System.Collections;
 using System.Threading.Tasks;
 
 namespace DataStructureProject.BubbleSort
 {
-    public class BubbleSortAlgorithm
+    public class BubbleSortAlgorithm<T> : baseStructure<T>, IExercise<T>
     {
-        public static async Task InitializeBubleSort()
+        public BubbleSortAlgorithm()
         {
-            var items = GeneralHelper.GetListOfNumbers();
-            var task = BubbleSort(items);
-            task.Start();
-            await task;
+            base.Execute = BubbleSortNumbers;
         }
 
-        private static Task BubbleSort(ArrayList input)
+        public async Task<bool> ExecuteTask(T[] numbers)
         {
             var task = new Task(() =>
             {
-                var count = input.Count;
-                for (int i = 0; i < count; i++)
-                {
-                    for (int j = 0; j < (count - 1); j++)
-                    {
-                        if ((int)input[j] > (int)input[j + 1])
-                        {
-                            int temp = (int)input[j];
-                            input[j] = input[j + 1];
-                            input[j + 1] = temp;
-                        }
-                    }
-                    Console.WriteLine("After iteration " + i.ToString() + ": " + GeneralHelper.PrintListOfNumbers(input));
-                }
+                base.RunExercise(numbers);
             });
 
-            return task;
+            task.Start();
+            await task;
+
+            return true;
+        }
+
+        public bool ExecuteExercise(T[] numbers)
+        {
+            base.RunExercise(numbers);
+
+            return true;
+        }
+
+        private void BubbleSortNumbers(T[] input)
+        {
+            var count = input.Length;
+            for (int i = 0; i < count; i++)
+            {
+                for (int j = 0; j < (count - 1); j++)
+                {
+                    if (int.Parse(input[j].ToString()) > int.Parse(input[j + 1].ToString())) //ToDo: IComparable implementation
+                    {
+                        T temp = input[j];
+                        input[j] = input[j + 1];
+                        input[j + 1] = temp;
+                    }
+                }
+                Console.WriteLine("After iteration " + i.ToString() + ": " + GeneralHelper.PrintListOfNumbers(input));
+            }
         }
     }
 }

@@ -21,7 +21,20 @@ namespace DataStructureProject
                     correctSelection = RunSelected(option);
 
                 if (!correctSelection)
-                    Console.WriteLine("Option not available");
+                {
+                    if (option < 0)
+                    {
+                        Console.Clear();
+                        GetOptions();
+                    }
+                    else if (option == 0)
+                    {
+                        Console.WriteLine("bye...");
+                        correctSelection = true;
+                    }
+                    else
+                        Console.WriteLine("Option not available");
+                }
                 else
                 {
                     if (option != 0)
@@ -29,8 +42,6 @@ namespace DataStructureProject
                         Console.WriteLine("....");
                         correctSelection = false;
                     }
-                    else
-                        Console.WriteLine("bye...");
                 }
             }
         }
@@ -69,45 +80,44 @@ namespace DataStructureProject
             var stopWatch = new Stopwatch();
             stopWatch.Start();
             bool result = true;
-            switch(option)
+
+            var exercise = excerciseFactory.GetExercise<int>(option);
+            if (exercise != null)
             {
-                case -1:
-                    Console.Clear();
-                    GetOptions();
-                    break;
-                case 0:
-                    break;
-                case 1:
-                    Fibonacci.Fibonacci.GetFibonacci().GetAwaiter().GetResult();
-                    break;
-                case 2:
-                    Singleton.SingleTonPattern.GetSingleTonPattern().GetAwaiter().GetResult();
-                    break;
-                case 3:
-                    var input = "(a[]{}([{}]d))";
-                    Exercises.BracketFormat.ValidateStringBrackets(input).GetAwaiter().GetResult();
-                    break;
-                case 4:
-                    BinarySearchTree.BinarySearchAlgorithm.BinarySearch().GetAwaiter().GetResult();
-                    break;
-                case 5:
-                    BubbleSort.BubbleSortAlgorithm.InitializeBubleSort().GetAwaiter().GetResult();
-                    break;
-                case 6:
-                    MergeSort.MergeSortAlgorithm.MergeSortRecursive().GetAwaiter().GetResult();
-                    break;
-                case 7:
-                    MergeSort.MergeSortAlgorithm.MergeSortIterative().GetAwaiter().GetResult();
-                    break;
-                case 8:
-                    int[] data = GeneralHelper.GetListOfNumbersArray(20);
-                    var linkedList = new LinkedListStructure.LinkedList<int>();
-                    linkedList.Process(data);
-                    break;
-                default:
-                    result = false;
-                    break;
+                int[] data = GeneralHelper.GetListOfNumbersArray(20);
+                result = exercise.ExecuteExercise(data);
             }
+            else
+                result = false;
+
+
+            //switch (option)
+            //{
+            //    case -1:
+            //        Console.Clear();
+            //        GetOptions();
+            //        break;
+            //    case 0:
+            //        break;
+            //    case 1:
+            //        Fibonacci.Fibonacci.GetFibonacci().GetAwaiter().GetResult();
+            //        break;
+            //    case 2:
+            //        Singleton.SingleTonPattern.GetSingleTonPattern().GetAwaiter().GetResult();
+            //        break;
+            //    case 3:
+            //        var input = "(a[]{}([{}]d))";
+            //        Exercises.BracketFormat.ValidateStringBrackets(input).GetAwaiter().GetResult();
+            //        break;
+            //    case 4:
+            //        BinarySearchTree.BinarySearchAlgorithm.BinarySearch().GetAwaiter().GetResult();
+            //        break;
+            //    default:
+            //        result = false;
+            //        break;
+            //}
+
+
             stopWatch.Stop();
 
             if (result)
